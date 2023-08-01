@@ -9,14 +9,25 @@ namespace BusinessLayer
 {
     public class Service
     {
-        private Access access = new Access();
+        private UserDBEntities userDBEntities;
 
-        public void AddUser(UserModel user) {
-            access.AddUser(user); 
+        public Service() {
+            userDBEntities = new UserDBEntities(); 
         }
 
-        public List<UserModel> GetAllUsers() {
-            return access.GetAllUsers(); 
+        public void AddUser(UserModel userModel) {
+            User user = new User()
+            {
+                UserName = userModel.UserName,
+                EmailAddress = userModel.EmailAddress,
+                Password = userModel.Password,
+            };
+            userDBEntities.Users.Add(user);
+            userDBEntities.SaveChanges(); 
         }
+
+        //public List<UserModel> GetAllUsers() {
+            //return access.GetAllUsers(); 
+        //}
     }
 }

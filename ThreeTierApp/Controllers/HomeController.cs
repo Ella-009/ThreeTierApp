@@ -17,21 +17,23 @@ namespace ThreeTierApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(UserModel user) {
+        public ActionResult Index(UserModel userModel) {
             if (!ModelState.IsValid) {
                 return View(); 
             }
             Service service = new Service();
-            service.AddUser(user); 
-
-            return View("Display"); 
+            service.AddUser(userModel); 
+            
+            return View("Display", userModel); 
         }
 
+        /*
         public ActionResult Display() {
             Service service = new Service();
             List<UserModel> users = service.GetAllUsers();
             return View("Display", users.ToList());
         }
+        */
 
         public ActionResult About()
         {
